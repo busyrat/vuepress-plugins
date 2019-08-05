@@ -1,0 +1,24 @@
+{
+  "name": "vuepress-plugin-vue-demo",
+  "version": "1.0.12",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vuepress",
+    "demo-block",
+    "vuepress-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/busyrat/blog/tree/master/docs/.vuepress/vue-demo"
+  },
+  "author": "busyrat",
+  "license": "ISC",
+  "dependencies": {
+    "markdown-it": "^8.4.2",
+    "markdown-it-container": "^2.0.0"
+  }
+}

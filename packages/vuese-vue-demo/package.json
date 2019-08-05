@@ -1,0 +1,27 @@
+{
+  "name": "vuepress-plugin-vuese-vue-demo",
+  "version": "1.0.8",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vuepress",
+    "vuese",
+    "vue-demo",
+    "vuepress-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/busyrat/blog/tree/master/docs/.vuepress/vuese-vue-demo"
+  },
+  "author": "busyrat",
+  "license": "ISC",
+  "dependencies": {
+    "@vuese/markdown-render": "^2.2.9",
+    "@vuese/parser": "^2.1.8",
+    "fs-extra": "^8.1.0",
+    "rimraf": "^2.6.3"
+  }
+}

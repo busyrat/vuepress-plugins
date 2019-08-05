@@ -1,0 +1,25 @@
+{
+  "name": "vuepress-plugin-iconfont-docs",
+  "version": "1.0.2",
+  "description": "iconfont 字体库快速生成文档",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vuepress",
+    "vuepress-plugin",
+    "iconfont",
+    "docs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/busyrat/blog/tree/master/docs/.vuepress/iconfont-docs"
+  },
+  "author": "busyrat",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0",
+    "vue-clipboard2": "^0.3.0"
+  }
+}

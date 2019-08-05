@@ -1,0 +1,26 @@
+{
+  "name": "vuepress-plugin-elementui-docs",
+  "version": "1.0.13",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vuepress",
+    "vuepress-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/busyrat/blog/tree/master/docs/.vuepress/elementui-docs"
+  },
+  "author": "busyrat",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "cross-spawn": "^6.0.5",
+    "fs-extra": "^8.1.0",
+    "js-beautify": "^1.10.1-rc2",
+    "request": "^2.88.0"
+  }
+}
