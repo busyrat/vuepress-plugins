@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vuepress dev . --no-cache",
+    "build": "vuepress build .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

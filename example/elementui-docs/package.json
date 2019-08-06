@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev docs --no-cache",
+    "build": "vuepress build docs",
     "debug": "node --nolazy --inspect-brk=9229 ./node_modules/vuepress/cli.js dev docs --no-cache",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "vuepress": "^1.0.3",
-    "vuepress-plugin-elementui-docs": "^1.0.13",
+    "vuepress-plugin-elementui-docs": "^1.0.14",
     "vuepress-plugin-vue-demo": "^1.0.13"
   },
   "dependencies": {

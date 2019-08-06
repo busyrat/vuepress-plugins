@@ -1,0 +1,25 @@
+{
+  "name": "vuepress-plugins",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "build:elementui-docs": "cd example/elementui-docs && yarn && yarn build",
+    "build:vue-demo": "cd example/vue-demo && yarn && yarn build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/busyrat/vuepress-plugins.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/busyrat/vuepress-plugins/issues"
+  },
+  "homepage": "https://github.com/busyrat/vuepress-plugins#readme"
+}
