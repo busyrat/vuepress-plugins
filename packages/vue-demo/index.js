@@ -4,7 +4,11 @@
 const containers = require('./containers')
 const { hashCode, creatDemoComponent, resolvePath } = require('./utils')
 
-module.exports = (options, ctx) => {
+module.exports = (opts, ctx) => {
+  const defaultOpts = {
+    demoBlockComponent: resolvePath('DemoBlock.vue')
+  }
+  opts = Object.assign(defaultOpts, opts)
   return {
     name: 'vue-demo',
 
@@ -14,7 +18,7 @@ module.exports = (options, ctx) => {
         content: `
           const requireComponent = require.context('@dynamic/demo/', true, /.*.vue$/)
           export default ({ Vue, router }) => {
-            Vue.component('DemoBlock', () => import('${resolvePath('DemoBlock.vue')}'))
+            Vue.component('DemoBlock', () => import('${opts.demoBlockComponent}'))
             requireComponent.keys().forEach(fileName => {
               const componentConfig = requireComponent(fileName)
               const component = componentConfig.default

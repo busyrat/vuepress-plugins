@@ -11,11 +11,11 @@ module.exports = (md, ctx) => {
 
   const render = (tokens, idx, options, env, self) => {
     const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
-    
+
     if (tokens[idx].nesting === 1) {
       const description = m && m.length > 1 ? m[1] : ''
       const content = tokens[idx + 1].type === 'fence' ? tokens[idx + 1].content : ''
-    
+
       const isNewPage = tokens.slice(0, idx).filter(_ => _.type === 'container_demo_open').length === 0
       if (isNewPage) {
         tagNameIndex = 0
@@ -34,9 +34,10 @@ module.exports = (md, ctx) => {
       return `<demo-block>
         <template slot="source"><${tagName}/></template>
         ${description ? `<div>${mdit.render(description)}</div>` : ''}
+        <template slot="code">
       `
     }
-    return '</demo-block>'
+    return '</template></demo-block>'
   }
 
   md.use(container, 'demo', { render, validate })
