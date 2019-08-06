@@ -3,11 +3,12 @@ const beautify = require('js-beautify').html
 
 const requestPromise = _url => {
   return new Promise((resolve, reject) => {
-    request(_url, function (error, response, body) {
+    request(_url, function(error, response, body) {
       if (!error && response.statusCode == 200) {
+        console.log(`fetch ${_url} done`)
         resolve(body)
       } else {
-        throw new Error('gen doc error')
+        throw new Error(`fetch ${_url} error`)
       }
     })
   })
@@ -42,8 +43,40 @@ const addElementUILink = (name, content, opts) => {
   return content.replace(/^##\s*(.+)/, `## [$1](${link})`)
 }
 
+const genNav = ({ include, navIndex, base }, ctx) => {
+  const nav = {
+    text: base,
+    link: `/${base}/${include[0]}`
+  }
+  if (!ctx.siteConfig.themeConfig) {
+    ctx.siteConfig.themeConfig = {}
+  }
+  let ctxNav = ctx.siteConfig.themeConfig.nav || []
+  ctxNav.splice(navIndex, 0, nav)
+  ctx.siteConfig.themeConfig.nav = ctxNav
+}
+
+const genSidebar = ({ version, include, base }, ctx) => {
+  const sidebar = {
+    [`/${base}/`]: [
+      {
+        title: `element-ui v${version}`,
+        sidebarDepth: 2,
+        children: include.map(name => [name, name])
+      }
+    ]
+  }
+  if (!ctx.siteConfig.themeConfig) {
+    ctx.siteConfig.themeConfig = {}
+  }
+  const ctxSidebar = ctx.siteConfig.themeConfig.sidebar || {}
+  ctx.siteConfig.themeConfig.sidebar = { ...ctxSidebar, ...sidebar }
+}
+
 module.exports = {
   requestPromise,
   formatDoc,
-  addElementUILink
+  addElementUILink,
+  genNav,
+  genSidebar
 }
