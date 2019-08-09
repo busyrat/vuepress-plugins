@@ -62,7 +62,10 @@ const genSidebar = ({ version, include, base }, ctx) => {
       {
         title: `element-ui v${version}`,
         sidebarDepth: 2,
-        children: include.map(name => [name, name])
+        children: include.map(name => {
+          name = name.match(/!?(\w+)/)[1]
+          return [name, name]
+        })
       }
     ]
   }

@@ -40,7 +40,9 @@ Vue.use(ElementUI)
 - 类型: `array`
 - 默认值: `['button', 'radio', 'input-number']`
 
-需要展示的组件
+需要展示的组件，会自动把官方文档拉取到本地
+
+约定以`!`开头的模块，只读本地文档，不合并官方文档
 
 ### cache
 

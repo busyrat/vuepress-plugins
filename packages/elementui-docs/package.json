@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-elementui-docs",
-  "version": "1.0.14",
+  "version": "1.0.17",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/busyrat/blog/tree/master/docs/.vuepress/elementui-docs"
+    "url": "https://github.com/busyrat/vuepress-plugins/tree/master/packages/elementui-docs"
   },
   "author": "busyrat",
   "license": "ISC",

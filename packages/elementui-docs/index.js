@@ -33,18 +33,21 @@ module.exports = (opts, ctx) => {
       await Promise.all(
         opts.include.map(async name => {
           let content = ''
-          if (opts.cache) {
-            try {
-              content = fs.readFileSync(sourceDir(`./.cache/${name}.md`), 'utf-8')
-            } catch (e) {
+          if (!/^!/.test(name)) {
+            if (opts.cache) {
+              try {
+                content = fs.readFileSync(sourceDir(`./.cache/${name}.md`), 'utf-8')
+              } catch (e) {
+                content = formatDoc(await requestPromise(`${BASE_URL}/${name}.md`))
+                fs.writeFileSync(sourceDir(`./.cache/${name}.md`), content, 'utf-8')
+              }
+            } else {
               content = formatDoc(await requestPromise(`${BASE_URL}/${name}.md`))
-              fs.writeFileSync(sourceDir(`./.cache/${name}.md`), content, 'utf-8')
             }
+            content = addElementUILink(name, content, opts)
           } else {
-            content = formatDoc(await requestPromise(`${BASE_URL}/${name}.md`))
+            name = name.slice(1)
           }
-
-          content = addElementUILink(name, content, opts)
 
           let filePath = sourceDir(`./.${opts.base}/${name}.md`)
           try {
