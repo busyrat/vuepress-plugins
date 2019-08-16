@@ -46,7 +46,7 @@ const addElementUILink = (name, content, opts) => {
 const genNav = ({ include, navIndex, base }, ctx) => {
   const nav = {
     text: base,
-    link: `/${base}/${include[0]}`
+    link: `/${base}/index.html`
   }
   if (!ctx.siteConfig.themeConfig) {
     ctx.siteConfig.themeConfig = {}

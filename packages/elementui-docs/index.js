@@ -31,8 +31,9 @@ module.exports = (opts, ctx) => {
         fs.mkdirpSync(sourceDir(`./.cache`))
       }
       await Promise.all(
-        opts.include.map(async name => {
+        opts.include.concat('!index').map(async name => {
           let content = ''
+          // !感叹号开头的模块不下载官网文档
           if (!/^!/.test(name)) {
             if (opts.cache) {
               try {
