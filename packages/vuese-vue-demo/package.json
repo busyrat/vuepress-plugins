@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-vuese-vue-demo",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,6 @@
     "@vuese/markdown-render": "^2.2.9",
     "@vuese/parser": "^2.1.8",
     "fs-extra": "^8.1.0",
-    "rimraf": "^2.6.3"
+    "rimraf": "^3.0.0"
   }
 }

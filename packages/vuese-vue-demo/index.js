@@ -1,11 +1,14 @@
 const { vuese } = require('./vuese')
+const { genNav, genSidebar } = require('./utils')
 
 module.exports = (opts, ctx) => {
   const defaultOpts = {
+    entry: undefined,
+    base: 'components',
     navIndex: 0,
-    edit: false,
-    entry: '',
-    baseDir: './docs/.vuepress'
+    genNav: true,
+    genSidebar: true,
+    edit: false
   }
   opts = Object.assign(defaultOpts, opts)
   return {
@@ -28,26 +31,18 @@ module.exports = (opts, ctx) => {
     },
 
     async ready() {
-      const componentPath = '/components/'
       const componentsName = await vuese(opts, ctx)
-      const nav = {
-        text: 'components',
-        link: componentPath + componentsName[0]
-      }
 
-      const sidebar = {
-        [componentPath]: componentsName.map(name => [name, name])
+      if (opts.genNav) {
+        genNav(opts, ctx, componentsName)
       }
-
-      if (!ctx.siteConfig.themeConfig) {
-        ctx.siteConfig.themeConfig = {}
+      if (opts.genSidebar) {
+        if (typeof opts.genSidebar === 'function') {
+          opts.genSidebar(componentsName)
+        } else {
+          genSidebar(opts, ctx, componentsName)
+        }
       }
-
-      let ctxSidebar = ctx.siteConfig.themeConfig.sidebar || {}
-      let ctxNav = ctx.siteConfig.themeConfig.nav || []
-      ctxNav.splice(opts.navIndex, 0, nav)
-      ctx.siteConfig.themeConfig.sidebar = { ...ctxSidebar, ...sidebar }
-      ctx.siteConfig.themeConfig.nav = ctxNav
     }
   }
 }

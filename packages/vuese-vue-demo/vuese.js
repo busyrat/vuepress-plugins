@@ -1,17 +1,16 @@
 const path = require('path')
 const fs = require('fs-extra')
-const rimraf = require('rimraf')
 const { Render } = require('@vuese/markdown-render')
 const { parser } = require('@vuese/parser')
-const { getComponents, mkdirpSync, basePath } = require('./utils')
+const { getComponents } = require('./utils')
 
 exports.vuese = async function(opts, ctx) {
-  rimraf.sync(basePath(opts.baseDir, `../components`))
+  const sourceDir = target => path.resolve(ctx.sourceDir, target).replace(/\\/g, '/')
+  const componentsPath = sourceDir('./components')
 
-  let componentPath = ''
-  if (opts.edit) {
-    componentPath = fs.mkdirpSync(basePath(opts.baseDir, `../components`))
-  }
+  fs.removeSync(componentsPath)
+  opts.edit && fs.mkdirpSync(componentsPath)
+
   const componentSources = getComponents(opts.entry)
 
   const componentsName = []
@@ -26,6 +25,7 @@ exports.vuese = async function(opts, ctx) {
       const r = new Render(parserRes)
       // 渲染完整的 markdown 文本，返回值是 markdown 字符串
       const markdownRes = r.renderMarkdown()
+      // 把.demo.vue文件中<md></md>里面的内容取出
       let md = demo.match(/\<md\>([\s\S]*)\<\/md\>/)
       let demomd = ''
       if (md) {
@@ -33,9 +33,10 @@ exports.vuese = async function(opts, ctx) {
         demomd = md[1]
       }
       let demoContent = `\n## Demo\n`
-      demoContent += `\n${demomd}\n\:\:\:demo \n\`\`\` vue \n${demo.trim()}\n\`\`\` \n\:\:\:\n`
-      const content = markdownRes.content.split('##')
+      demoContent += `\n${demomd}\n:::demo \n\`\`\` vue \n${demo.trim()}\n\`\`\` \n:::\n`
+
       // 第一个二级标题是 ## Demo
+      const content = markdownRes.content.split('##')
       content[0] += demoContent
       const data = `${content.join('##')}`
 
@@ -43,11 +44,11 @@ exports.vuese = async function(opts, ctx) {
       componentsName.push(markdownRes.componentName)
 
       if (opts.edit) {
-        fs.writeFileSync(`${componentPath}/${markdownRes.componentName}.md`, data, 'utf-8')
+        fs.writeFileSync(`${componentsPath}/${markdownRes.componentName}.md`, data, 'utf-8')
       } else {
         await ctx.addPage({
           content: data,
-          permalink: `/components/${markdownRes.componentName}.html`
+          permalink: `/${opts.base}/${markdownRes.componentName}.html`
         })
       }
     })

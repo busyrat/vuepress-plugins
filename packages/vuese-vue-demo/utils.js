@@ -1,9 +1,8 @@
 const path = require('path')
-const basePath = (base, p) => path.resolve(process.cwd(), base, p).replace(/\\/g, '/')
 const resolvePath = p => path.resolve(__dirname, p).replace(/\\/g, '/')
-const fs = require('fs')
 const glob = require('glob')
 
+// 找到.demo.vue同级的index.vue
 const getComponents = entry => {
   const componentDemos = glob.sync(`${entry}/**/.demo.vue`)
   const componentSources = componentDemos.map(demoPath => path.resolve(path.dirname(demoPath), 'index.vue'))
@@ -11,21 +10,40 @@ const getComponents = entry => {
   return componentSources
 }
 
-const mkdirpSync = path => {
-  const pathArr = path.split('/')
-  let _path = ''
-  for (let i = 0; i < pathArr.length; i++) {
-    _path += `${pathArr[i]}/`
-    if (!fs.existsSync(_path)) {
-      fs.mkdirSync(_path)
-    }
+const genNav = ({ navIndex, base }, ctx, componentsName) => {
+  const nav = {
+    text: base,
+    link: `/${base}/${componentsName[0]}.html`
   }
-  return path
+
+  if (!ctx.siteConfig.themeConfig) {
+    ctx.siteConfig.themeConfig = {}
+  }
+  let ctxNav = ctx.siteConfig.themeConfig.nav || []
+  ctxNav.splice(navIndex, 0, nav)
+  ctx.siteConfig.themeConfig.nav = ctxNav
+}
+
+const genSidebar = ({ base }, ctx, componentsName) => {
+  const sidebar = {
+    [`/${base}/`]: [
+      {
+        title: base,
+        sidebarDepth: 2,
+        children: componentsName.map(name => [name, name])
+      }
+    ]
+  }
+  if (!ctx.siteConfig.themeConfig) {
+    ctx.siteConfig.themeConfig = {}
+  }
+  const ctxSidebar = ctx.siteConfig.themeConfig.sidebar || {}
+  ctx.siteConfig.themeConfig.sidebar = { ...ctxSidebar, ...sidebar }
 }
 
 module.exports = {
   resolvePath,
-  basePath,
   getComponents,
-  mkdirpSync
+  genNav,
+  genSidebar
 }
