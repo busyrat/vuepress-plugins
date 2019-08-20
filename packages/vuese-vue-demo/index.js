@@ -39,6 +39,10 @@ module.exports = (opts, ctx) => {
         [componentPath]: componentsName.map(name => [name, name])
       }
 
+      if (!ctx.siteConfig.themeConfig) {
+        ctx.siteConfig.themeConfig = {}
+      }
+
       let ctxSidebar = ctx.siteConfig.themeConfig.sidebar || {}
       let ctxNav = ctx.siteConfig.themeConfig.nav || []
       ctxNav.splice(opts.navIndex, 0, nav)
