@@ -18,7 +18,9 @@ module.exports = (opts, ctx) => {
   const defaultOpts = {
     fontClass: 'icon-',
     fontFamily: 'iconfont',
-    key: ''
+    key: '',
+    genNav: true,
+    navIndex: 0
   }
   opts = Object.assign(defaultOpts, opts)
 
@@ -46,18 +48,31 @@ module.exports = (opts, ctx) => {
     async ready() {
       const url = `https://at.alicdn.com/t/${opts.key}.css`
       const iconCSS = await requestPromise(url)
-      const reg = new RegExp(`(?<=${opts.fontClass})\\w*(?=:before)`, 'g')
+      const reg = new RegExp(`(?<=\.${opts.fontClass})[\\w-]*?(?=:{1,2}before\\s*\\{\\s*content)`, 'g')
       const iconClasses = iconCSS.match(reg)
 
       const content = `
         \n# iconfont
-        \n> key: ${opts.key} 
+        \n> key: \`${opts.key}\` fontClass: \`${opts.fontClass}\`  fontFamily: \`${opts.fontFamily}\`
         \n${iconClasses.map(icon => `<icon-demo classs="${opts.fontClass}${icon}" fontFamily="${opts.fontFamily}"/>\n`).join('')}
       `
       await ctx.addPage({
         content,
         permalink: '/iconfont.html'
       })
+
+      if (opts.genNav) {
+        const nav = {
+          text: 'iconfont',
+          link: '/iconfont'
+        }
+        if (!ctx.siteConfig.themeConfig) {
+          ctx.siteConfig.themeConfig = {}
+        }
+        let ctxNav = ctx.siteConfig.themeConfig.nav || []
+        ctxNav.splice(opts.navIndex, 0, nav)
+        ctx.siteConfig.themeConfig.nav = ctxNav
+      }
     }
   }
 }

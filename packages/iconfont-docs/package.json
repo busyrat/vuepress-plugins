@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-iconfont-docs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "iconfont 字体库快速生成文档",
   "main": "index.js",
   "scripts": {
