@@ -8,3 +8,7 @@ vuepress-plugin-vue-demo
 
 vuepress-plugin-elementui-docs
 [文档](https://github.com/busyrat/vuepress-plugins/blob/master/packages/elementui-docs/README.md) ➡️[预览](https://busyrat.github.io/vuepress-plugins/elementui-docs/)
+
+
+vuepress-plugin-vuese-docs
+[文档](https://github.com/busyrat/vuepress-plugins/blob/master/packages/vuese-docs/README.md) ➡️[预览](https://busyrat.github.io/vuepress-plugins/vuese-docs/)

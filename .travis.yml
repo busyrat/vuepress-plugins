@@ -4,6 +4,7 @@ node_js:
 script:
   - yarn build:elementui-docs
   - yarn build:vue-demo
+  - yarn build:vuese-docs
 deploy:
   provider: pages
   skip-cleanup: true

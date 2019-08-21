@@ -9,6 +9,7 @@
   "scripts": {
     "build:elementui-docs": "cd example/elementui-docs && yarn && yarn build",
     "build:vue-demo": "cd example/vue-demo && yarn && yarn build",
+    "build:vuese-docs": "cd example/vuese-docs && yarn && yarn build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

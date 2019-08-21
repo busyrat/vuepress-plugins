@@ -1,0 +1,19 @@
+{
+  "name": "vuepress-plugin-vuese-docs-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vuepress dev docs --no-cache",
+    "build": "vuepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "description": "",
+  "devDependencies": {
+    "vuepress": "^1.0.3",
+    "vuepress-plugin-vue-demo": "^1.0.12",
+    "vuepress-plugin-vuese-docs": "^1.0.10"
+  }
+}
