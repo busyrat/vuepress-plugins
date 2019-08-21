@@ -12,7 +12,7 @@ module.exports = (opts, ctx) => {
   }
   opts = Object.assign(defaultOpts, opts)
   return {
-    name: 'vuese-vue-demo',
+    name: 'vuese-docs',
 
     enhanceAppFiles() {
       return {

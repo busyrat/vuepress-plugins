@@ -1,4 +1,4 @@
-# vuepress-plugin-vuese-vue-demo
+# vuepress-plugin-vuese-docs
 
 > 基于 vuese 自动生成项目组件文档
 
@@ -7,7 +7,7 @@
 ## install
 
 ```
-yarn add vuepress-plugin-vuese-vue-demo vuepress-plugin-vue-demo -D
+yarn add vuepress-plugin-vuese-docs vuepress-plugin-vue-demo -D
 ```
 
 ## set vuepress config
@@ -15,7 +15,7 @@ yarn add vuepress-plugin-vuese-vue-demo vuepress-plugin-vue-demo -D
 ```
 // .vuepress/config.js
 module.exports = {
-  plugins: ['vue-demo', 'vuese-vue-demo']
+  plugins: ['vue-demo', 'vuese-docs']
 }
 ```
 
