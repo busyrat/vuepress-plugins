@@ -3,6 +3,7 @@
 
 const containers = require('./containers')
 const { hashCode, creatDemoComponent, resolvePath } = require('./utils')
+const path = require('path')
 
 module.exports = (opts, ctx) => {
   const defaultOpts = {
@@ -16,14 +17,8 @@ module.exports = (opts, ctx) => {
       return {
         name: 'dynamic-code',
         content: `
-          const requireComponent = require.context('@dynamic/demo/', true, /.*.vue$/)
           export default ({ Vue, router }) => {
             Vue.component('DemoBlock', () => import('${opts.demoBlockComponent}'))
-            requireComponent.keys().forEach(fileName => {
-              const componentConfig = requireComponent(fileName)
-              const component = componentConfig.default
-              Vue.component(fileName.match(/\\.\\/(.*)\\.vue/)[1], component)
-            })
           }
          `
       }
@@ -49,6 +44,15 @@ module.exports = (opts, ctx) => {
 
     extendMarkdown(md) {
       containers(md, ctx)
-    }
+    },
+
+    plugins: [
+      [
+        '@vuepress/register-components',
+        {
+          componentsDir: path.resolve(ctx.tempPath, 'dynamic/demo')
+        }
+      ]
+    ]
   }
 }
