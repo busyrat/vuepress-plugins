@@ -30,6 +30,7 @@ module.exports = (opts, ctx) => {
       if (opts.cache) {
         fs.mkdirpSync(sourceDir(`./.cache`))
       }
+      let filesPath = []
       await Promise.all(
         opts.include.concat('!index').map(async name => {
           let content = ''
@@ -53,6 +54,7 @@ module.exports = (opts, ctx) => {
           let filePath = sourceDir(`./.${opts.base}/${name}.md`)
           try {
             extendContent = fs.readFileSync(filePath, 'utf-8')
+            filesPath.push(filePath)
           } catch (error) {
             extendContent = ''
             filePath = null
@@ -67,6 +69,12 @@ module.exports = (opts, ctx) => {
           })
         })
       )
+
+      // 指定额外的需要被监听的文件
+      if (!ctx.siteConfig.extraWatchFiles) {
+        ctx.siteConfig.extraWatchFiles = []
+      }
+      ctx.siteConfig.extraWatchFiles = ctx.siteConfig.extraWatchFiles.concat(filesPath)
 
       if (opts.genNav) {
         genNav(opts, ctx)
