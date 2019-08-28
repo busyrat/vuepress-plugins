@@ -180,38 +180,6 @@
       padding-right: 25px;
     }
   }
-
-  // 重置vuepress默认样式 https://github.com/vuejs/vuepress/blob/master/packages/%40vuepress/theme-default/styles/index.styl
-  table {
-    margin: 0;
-  }
-
-  ul, ol {
-    padding-left: 0;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    line-height: 1;
-    font-size: 100%;
-  }
-
-  p, ul, ol {
-    line-height: 1;
-  }
-
-  tr {
-    border-top: 0;
-    background-color: transparent;
-  }
-
-  tr:nth-child(2n) {
-    background-color: transparent;
-  }
-
-  th, td {
-    border: 0;
-  }
 }
 </style>
 
@@ -257,7 +225,7 @@ export default {
       return compoLang.filter(config => config.lang === this.lang)[0]['demo-block']
     },
     blockClass() {
-      return `${this.$slots.source[0].tag} demo-${this.lang} demo-${this.$router.currentRoute.path.split('/').pop()}`
+      return `${this.$slots.source[0].tag} demo-${this.lang} demo-${this.$router.currentRoute.path.match(/([^\/]*?)(\.html)?$/)[1]}`
     },
     iconClass() {
       return this.isExpanded ? 'caret-top' : 'caret-bottom'
