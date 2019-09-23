@@ -2,6 +2,8 @@
 
 > vuepress 中使用类似 element-ui 官方文档的效果：在 markdown 中写 vue 组件 demo
 
+[demo link](https://busyrat.github.io/vuepress-plugins/vue-demo/)
+
 ## install plugin
 
 ```

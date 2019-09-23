@@ -4,6 +4,8 @@
 
 搭配 vuepress-plugin-vue-demo 一起使用
 
+[demo link](https://busyrat.github.io/vuepress-plugins/vuese-docs/%E7%BB%84%E4%BB%B6/Comp.html)
+
 ## install
 
 ```
