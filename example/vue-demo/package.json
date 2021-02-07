@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vuepress dev . --no-cache",
     "build": "vuepress build .",
+    "debug": "node --nolazy --inspect-brk=9229 ./node_modules/vuepress/cli.js dev . --no-cache",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
