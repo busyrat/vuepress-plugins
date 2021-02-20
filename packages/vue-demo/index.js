@@ -30,14 +30,14 @@ module.exports = (opts, ctx) => {
       if (typeof content === 'string') {
         let demoCodes = content.split(/:::/).filter(s => /^\s*demo/.test(s))
 
-        demoCodes.forEach((code, index) => {
+        demoCodes.forEach(async (code, index) => {
           let t = code.split(/```[\s\S]*?(?=\<)/)
           if (t.length > 1) {
             code = t.slice(1).join('')
           }
 
           const tagName = `demo-block-${relativePath ? hashCode(relativePath) : key}-${index}`
-          creatDemoComponent(ctx, code, tagName)
+          await creatDemoComponent(ctx, code, tagName)
         })
       }
     },
